@@ -1,47 +1,60 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { ImgWrapper, Img, Button, Article } from './styles'
-import { MdFavoriteBorder } from 'react-icons/md'
+import React from 'react'
+import { ImgWrapper, Img, Article } from './styles'
+import { useNearScreen } from '../../hooks/useNearScreen'
+import { FavButton } from '../FavButton'
+import { ToggleLikeMutation } from '../../container/ToggleLikeMutation'
+import { Link } from 'react-router-dom'
+import propTypes from 'prop-types'
 
 const DEFAULT_IMAGE = 'https://res.cloudinary.com/midudev/image/upload/w_300/q_80/v1560262103/dogs.png'
 
-export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
-  const element = useRef(null)
-  const [show, setShow] = useState(false)
-
-  useEffect(function () {
-    Promise.resolve(
-      typeof window.IntersectionObserver !== 'undefined'
-        ? window.IntersectionObserver
-        : import('intersection-observer')
-    ).then(() => {
-      const observer = new window.IntersectionObserver(function (entries) {
-        const { isIntersecting } = entries[0]
-        if (isIntersecting) {
-          setShow(true)
-          observer.disconnect()
-        }
-      })
-      observer.observe(element.current)
-    })
-  }, [element])
+export const PhotoCard = ({ id, liked, likes = 0, src = DEFAULT_IMAGE }) => {
+  const [show, element] = useNearScreen()
 
   return (
     <Article ref={element}>
       {
         show &&
           <>
-            <a href={`/detail/${id}`}>
+            <Link to={`/detail/${id}`}>
               <ImgWrapper>
                 <Img src={src} />
               </ImgWrapper>
-            </a>
+            </Link>
+            <ToggleLikeMutation>
+              {
+                (toggleLike) => {
+                  const handleFavClick = () => {
+                    toggleLike({
+                      variables: {
+                        input: { id }
+                      }
+                    })
+                  }
+                  return <FavButton liked={liked} likes={likes} onClick={handleFavClick} />
+                }
+              }
 
-            <Button>
-              <MdFavoriteBorder size='32px' />{likes} likes!
-            </Button>
+            </ToggleLikeMutation>
           </>
       }
 
     </Article>
   )
+}
+
+PhotoCard.propTypes = {
+  id: propTypes.string.isRequired,
+  liked: propTypes.bool.isRequired,
+  src: propTypes.string.isRequired,
+  likes: function (props, propName, componentName) {
+    const propValue = props[propName]
+    if (propValue === undefined) {
+      return new Error(`${propName} value must be defined`)
+    }
+
+    if (propValue < 0) {
+      return new Error(`${propName} value must be greater than 0`)
+    }
+  }
 }
