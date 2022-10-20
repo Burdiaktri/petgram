@@ -3,10 +3,10 @@ import { useParams } from 'react-router-dom'
 import { PhotoCardWithQuery } from '../container/PhotoCardWithQuery'
 import { Layout } from '../components/Layout'
 
-const Detail = ({ detailId }) => {
+const Detail = () => {
   const params = useParams()
   return (
-    <Layout title={`Fotografia ${detailId}`}>
+    <Layout title={`Fotografía ${params.detailId}`}>
       <PhotoCardWithQuery id={params.detailId} />
     </Layout>
   )

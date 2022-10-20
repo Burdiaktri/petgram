@@ -6,9 +6,11 @@ border-radius: 10px;
 display: block;
 height: 0;
 overflow: hidden;
-padding: 56.25% 0 0 0;
+padding: 54.25% 0 0 0;
 position: relative;
 width: 100%;
+margin-top: 20px;
+margin-left: -15px;
 `
 export const Article = styled.article`
 min-height: 200px;

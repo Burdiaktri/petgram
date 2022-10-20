@@ -8,8 +8,7 @@ const HomePage = () => {
   const params = useParams()
   return (
 
-    <Layout title='Tu app de mascotas' subtitle='Con Petgram puedes encontrar fotos de animales domésticos muy bonitos'>
-
+    <Layout title='Tu app de mascotas'>
       <ListOfCategories />
       <ListOfPhotoCards categoryId={params.id} />
     </Layout>

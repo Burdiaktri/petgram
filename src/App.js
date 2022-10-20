@@ -9,7 +9,8 @@ const Logo = React.lazy(() => import('./components/Logo'))
 const Detail = React.lazy(() => import('./pages/Detail'))
 const NavBar = React.lazy(() => import('./components/NavBar'))
 const User = React.lazy(() => import('./pages/User'))
-const NotRegisteredUser = React.lazy(() => import('./pages/NotRegisteredUser'))
+const Login = React.lazy(() => import('./pages/Login'))
+const Register = React.lazy(() => import('./pages/Register'))
 const NotFound = React.lazy(() => import('./pages/NotFound'))
 
 export const App = () => {
@@ -28,7 +29,8 @@ export const App = () => {
           <Route path='/detail/:detailId' element={<Detail />} />
           <Route exact path='/favs' element={isAuth ? <Favs /> : <Navigate replace to='/login' />} />
           <Route exact path='/user' element={isAuth ? <User /> : <Navigate replace to='/login' />} />
-          <Route exact path='/login' element={!isAuth ? <NotRegisteredUser /> : <Navigate replace to='/' />} />
+          <Route exact path='/login' element={!isAuth ? <Login /> : <Navigate replace to='/' />} />
+          <Route exact path='/register' element={!isAuth ? <Register /> : <Navigate replace to='/' />} />
         </Routes>
         <NavBar />
       </BrowserRouter>

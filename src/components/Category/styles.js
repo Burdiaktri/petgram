@@ -6,7 +6,7 @@ export const Link = styled(LinkRouter)`
     flex-direction: column;
     text-align: center;
     text-decoration: none;
-    width: 75;
+    width: 75%;
     `
 
 export const Image = styled.img`
@@ -17,4 +17,5 @@ height: auto;
 overflow: hidden;
 object-fit: cover;
 height: 75px;
-width: 75px;`
+width: 75px;
+`

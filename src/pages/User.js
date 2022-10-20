@@ -6,7 +6,6 @@ const User = () => {
   const { removeAuth } = useContext(AppContext)
   return (
     <>
-      <h1>User</h1>
       <SubmitButton onClick={removeAuth}>Cerrar Sesión</SubmitButton>
     </>
   )

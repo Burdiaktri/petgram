@@ -6,4 +6,5 @@ display: flex;
 align-items: center;
 & svg {
     margin-right: 4px;
+    margin-left: -10px;
 }`

@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { fadeIn } from '../../styles/animation'
 export const List = styled.ul`
 display: flex;
-overflow: scroll;
+overflow: auto;
 width: 100%;
 ${props => props.fixed && css`
 ${fadeIn()};
